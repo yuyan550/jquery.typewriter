@@ -1,0 +1,78 @@
+body{
+	background-color :#F9F9F9;
+	font-size: 15px;
+	font-family: '宋体';
+}
+.main{
+	background-color: white;
+	margin: 0 auto;
+	width: 70%;
+	padding: 20px 20px;
+}
+h1{
+	font-family: '微软雅黑';
+	font-size: 26px;
+	font-weight: 400;
+	margin: 0;
+}
+h2{
+	font-family: '微软雅黑';
+	font-size: 17px;
+}
+h3{
+	font-family: '微软雅黑';
+	font-size: 15px;
+}
+p,input{
+	font-family: '宋体';
+}
+.main>div{
+	padding: 20px 0px ;
+	border: 0;
+	border-top: 1px solid #AAA;
+	border-bottom: 1px solid #AAA;
+}
+.function{
+	width: 80%;
+	height: 100px;
+	border: 1px solid grey;
+	overflow: auto;
+	margin: 20px 0;
+}
+pre{
+	margin: 20px 0;
+	padding: 10px;
+	border: 1px dotted grey;
+	background: #F5F5F5;
+	font-family: Consolas, "Courier New", Courier, monospace;
+	font-size: 14px;
+	white-space: pre-wrap;
+}
+input{
+}
+table{
+	/*margin-top: 10px;*/
+	border-collapse: collapse;
+	border: 1px solid grey;
+	width: 100%;
+}
+table th,table td{
+	border: 1px solid grey;
+	padding: 5px;
+	background-color: #F5F5F5;
+}
+table td:nth-child(even)
+{
+	width: 85%;
+	background:white;
+}
+table th{
+	background-color: #D9D9D9;
+}
+table p,table ul,.function>p{
+	margin-top: 0;
+}
+div.cmd{
+	background-color: black;
+	color: #C0C0C0;
+}

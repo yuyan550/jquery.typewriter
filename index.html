@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery插件 - typewriter介绍</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="jquery-1.10.2.js"></script>
+	<script src="jquery.typewriter.js"></script>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script>
+		$(function(){
+			$("input").removeAttr("disabled");
+			$("#button1").on("click",function(){
+				$("#typewriterText1").typewriter("Hello World!\nThis is a typewriter animate", 200 ,"vertical");
+				$(this).attr("disabled","disabled");
+			});
+			$("#button2").on("click",function(){
+				$("#typewriterText2").typewriter("Hello World!\nThis is a typewriter animate", 200, "vertical", function(){$(this).typewriter_cursor().remove();});
+				$(this).attr("disabled","disabled");
+			});
+			$("#button3").on("click",function(){
+				$("#typewriterText3").typewriter({
+					printText:"Microsoft Windows [版本 6.1.7601]\n版权所有 (c) 2009 Microsoft Corporation。保留所有权利。",
+					printSpeed:200,
+					cursor:"underline",
+					cursorColor:"#C0C0C0"
+				});
+				$(this).attr("disabled","disabled");
+			});
+			$("#button4").on("click",function(){
+				var printText = $("#typewriterText4").text();
+				$("#typewriterText4").text("").typewriter(printText, 0, "vertical").typewriter_backspace(10, 300, function(){$(this).typewriter_cursor().remove();});
+				$(this).attr("disabled","disabled");
+			});
+			$("#button5").on("click",function(){
+				$("#typewriterText5").typewriter_cursor("vertical", 0).typewriter("Hello World!\nThis is a typewriter animate").delay(500).typewriter_cursor("vertical");
+				$(this).attr("disabled","disabled");
+			});
+			$("#button6").on("click",function(){
+				$("#typewriterText6").typewriter_cursor("block").delay(1500).typewriter("苟利国家生死以，",300).delay(2500).typewriter("我为长",300).delay(3000).typewriter_backspace(3,300).delay(2000).typewriter("岂因祸福避趋之",300).delay(3000).typewriter("\n                            ",70).typewriter("————林则徐",300);
+				$(this).attr("disabled","disabled");
+			});
+		}); 
+	</script>
+</head>
+<body>
+	<div class="main">
+		<h1>jQuery插件 - typewriter介绍</h1>
+		<div>
+			<p>typewriter插件是实现打字，退格的动画效果。</p>
+			<p>它定义了typewriter(), typewriter_cursor(), typewriter_backspace()三个方法。</p>
+			<h2>实例</h2>
+			<p>在div中实现文字逐个打印的动画效果</p>
+			<pre>$(&quot;#typewriterText1&quot;).typewriter(&quot;Hello World!\nThis is a typewriter animate&quot;, 200 ,&quot;vertical&quot;);</pre>
+			<div class="function">
+				<p id="typewriterText1"></p>
+			</div>
+			<input id="button1" type="button" value="试试看" />
+		</div>
+		<div>
+			<h2>引用</h2>
+			<p>使用该插件需先引入jQuery和jquery.typewriter.js文件</p>
+			<pre>&lt;script src=&quot;jquery-1.10.2.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;jquery.typewriter.js&quot;&gt;&lt;/script&gt;</pre>
+		</div>
+
+		<div>
+			<h2>typewriter方法的定义和用法</h2>
+			<p>实现打印文字的动画效果。</p>
+			<h3>语法1</h3>
+			<pre>$(selector).typewriter(printText, printSpeed, cursor, calback)</pre>
+			<table>
+				<tr>
+					<th>参数</th><th>描述</th>
+				</tr>
+				<tr>
+					<td>printText</td>
+					<td>必需。规定打印的文字。</td>
+				</tr>
+				<tr>
+					<td>printSpeed</td>
+					<td>可选。规定每打印一个文字的间隔时间。默认为300（毫秒）。</td>
+				</tr>
+				<tr>
+					<td>cursor</td>
+					<td>
+						<p>可选。规定设置显示的光标元素。默认不进行设置。(可以省略)</p>
+						<p>可能的值：</p>
+						<ul>
+							<li>&quot;none&quot; ： 设置为无光标元素</li>
+							<li>&quot;vertical&quot; ：设置竖线（|）光标元素</li>
+							<li>&quot;block&quot; ：设置块形（<span style="background-color:black;">&nbsp;</span>）光标元素</li>
+							<li>&quot;underline&quot; ：设置下划线（_）光标元素</li>
+							<li>或者可以传入自定义的DOM元素，jQuery对象，原始 HTML字符串，jQuery选择器</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td>calback</td>
+					<td>可选。打字动画执行完之后，要执行的回调函数。</td>
+				</tr>
+			</table>
+			<h3>示例：</h3>
+			<p>打印文字，完成后清除光标元素。</p>
+			<pre>$(&quot;#typewriterText2&quot;).typewriter(&quot;Hello World!\nThis is a typewriter animate&quot;, 200, &quot;vertical&quot;, 
+function(){$(this).typewriter_cursor().remove();});</pre>
+			<div class="function">
+				<p id="typewriterText2"></p>
+			</div>
+			<input id="button2" type="button" value="试试看" />
+		</div>
+
+		<div>
+			<h3>语法2</h3>
+			<pre>$(selector).typewriter(options)</pre>
+			<table>
+				<tr>
+					<th>参数</th><th>描述</th>
+				</tr>
+				<tr>
+					<td>options</td>
+					<td>
+						<p>必需。规定打印选项的对象。</p>
+						<p>属性：</p>
+						<ul>
+							<li>printText：必需。规定打印的文字。</li>
+							<li>printSpeed：可选。规定每打印一个文字的间隔时间。默认为300（毫秒）。</li>
+							<li>cursor：可选。规定设置显示的光标元素。默认不进行设置。（可能的值同上）</li>
+							<li>calback：可选。打字动画执行完之后，要执行的回调函数。</li>
+							<li>queue：可选。布尔值。指示是否在效果队列中放置动画。默认为True。</li>
+							<li>cursorBlinkRate：可选。规定光标的闪烁速度，0为不闪烁。默认为541（毫秒）</li>
+							<li>cursorColor：可选。规定光标的颜色。默认为黑色。（如果cursor属性为自定义，则该参数无效）</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+			<h3>示例：</h3>
+			<pre>$(&quot;#typewriterText3&quot;).typewriter({
+printText:&quot;Microsoft Windows [版本 6.1.7601]\n版权所有 (c) 2009 Microsoft Corporation。保留所有权利。&quot;,
+printSpeed:200,
+cursor:&quot;underline&quot;,
+cursorColor:&quot;#C0C0C0&quot;
+})</pre>
+			<div class="function cmd">
+				<p id="typewriterText3"></p>
+			</div>
+			<input id="button3" type="button" value="试试看" />
+		</div>
+
+		<div>
+			<h2>typewriter_cursor方法的定义和用法</h2>
+			<p>设置或返回元素的光标元素</p>
+			<h3>返回元素的光标元素<h3>
+			<h3>语法</h3>
+			<pre>$(selector).typewriter_cursor()</pre>
+			<h3>设置元素的光标元素<h3>
+			<h3>语法</h3>
+			<pre>$(selector).typewriter_cursor(cursor, cursorBlinkRate, cursorColor)</pre>
+			<table>
+				<tr>
+					<th>参数</th><th>描述</th>
+				</tr>
+				<tr>
+					<td>cursor</td>
+					<td>必需。规定设置显示的光标元素。（可能的值同上）</td>
+				</tr>
+				<tr>
+					<td>cursorBlinkRate</td>
+					<td>可选。规定光标的闪烁速度，0为不闪烁。默认为541（毫秒）</td>
+				</tr>
+				<tr>
+					<td>cursorColor</td>
+					<td>可选。规定光标的颜色。默认为黑色。（如果cursor属性为自定义，则该参数无效）</td>
+				</tr>
+			</table>
+		</div>
+
+		<div>
+			<h2>typewriter_backspace方法的定义和用法</h2>
+			<p>对typewriter方法打印出的文本进行退格的动画</p>
+			<h3>语法</h3>
+			<pre>$(selector).typewriter_backspace(count, printSpeed, queue, calback)</pre>
+			<table>
+				<tr>
+					<th>参数</th><th>描述</th>
+				</tr>
+				<tr>
+					<td>count</td>
+					<td>必需。规定要退格的字数</td>
+				</tr>
+				<tr>
+					<td>printSpeed</td>
+					<td>可选。规定每退格一个文字的间隔时间。默认为300（毫秒）。</td>
+				</tr>
+				<tr>
+					<td>queue</td>
+					<td>可选。布尔值。指示是否在效果队列中放置动画。默认为True。(可以省略)</td>
+				</tr>
+				<tr>
+					<td>calback</td>
+					<td>可选。打字动画执行完之后，要执行的回调函数。</td>
+				</tr>
+			</table>
+			<p>注意：typewriter_backspace不可以直接对非typewriter方法打印出的文本进行退格动画。</p>
+			<p>但可以使用示例的方法进行实现。</p>
+			<h3>示例：</h3>
+			<pre>var printText = $(&quot;#typewriterText4&quot;).text();
+$(&quot;#typewriterText4&quot;).text(&quot;&quot;).typewriter(printText, 0, &quot;vertical&quot;)
+.typewriter_backspace(10, 300,
+ function(){$(this).typewriter_cursor().remove();});</pre>
+			<div class="function">
+				<p id="typewriterText4">使用退格动画删除掉10个字符。删除完成后清除光标元素。</p>
+			</div>
+			<input id="button4" type="button" value="试试看" />
+		</div>
+
+		<div>
+			<h2>其他</h2>
+			<p>typewriter还定义了两个变量，可以设置默认打印速度和默认光标闪烁速度
+			<pre>$.fn.typewriter.printSpeed = 300;//默认打印速度
+$.fn.typewriter.cursorBlinkRate = 541;//默认光标闪烁速度</pre>
+		</div>
+
+		<div>
+			<h2>更多示例</h2>
+			<h3>示例1</h3>
+			<p>在打印文字时不闪烁光标，打印结束后才开始闪烁。</p>
+			<pre>$(&quot;#typewriterText5&quot;).typewriter_cursor(&quot;vertical&quot;, 0)
+.typewriter(&quot;Hello World!\nThis is a typewriter animate&quot;)
+.delay(500).typewriter_cursor(&quot;vertical&quot;)</pre>
+			<div class="function">
+				<p id="typewriterText5"></p>
+			</div>
+			<input id="button5" type="button" value="试试看" />
+			<h3>示例2</h3>
+			<div class="function">
+				<p id="typewriterText6"></p>
+			</div>
+			<input id="button6" type="button" value="试试看" />
+		</div>
+	</div>
+</body>
+</html>
